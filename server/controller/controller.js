@@ -1,47 +1,38 @@
-// import express from 'express';
-import { MongoClient } from "mongodb";
+import Todos from "../models/todomodel.js";
 // import expressAsyncHandler from "express-async-handler"
 
-async function dbconfig(){
-    try{
-        const client=await MongoClient.connect(process.env.MONGO_KEY);
-        console.log("connected successfully");
-        return client;
-    }
-    catch(error){
-        console.log("erreo");
-        console.log(error);
-    }
-}
 
-// const client=await dbconfig();
 //@desc :Get all todos from db  ,@url :GET /api/todos/
 const getTodos=async(req,res)=>{
-    const client=await dbconfig();
-    const db=client.db("project0db");
-    const collection = db.collection("todos");
-    const result = await collection.find().toArray();
+    const result = await Todos.find();
     res.json(result);
 }
 
 //@desc :Post new todo to db  ,@url :POST /api/todos/
 const postTodos=async(req,res)=>{
-    const client=await dbconfig();
-    const db=client.db("project0db");
-    const collection = db.collection("todos");
-    const result=await collection.insertOne(req.body);
-    // console.log(req.body);
+    const result=await Todos.create({
+        title: req.body.title
+    });
     res.json(result);
 }
 
 //@desc :Update todo with param.id from db  ,@url :PUT /api/todos/id
-const updateTodos=(req,res)=>{
-    res.json({"msg":`Update request from server for ${req.params.id}`});
+const updateTodos=async(req,res)=>{
+    const result=await Todos.updateOne(
+        {title: req.params.id},
+        {$set:
+            {title: req.body.title}
+        }
+    );
+    res.json(result);
 }
 
 //@desc :Delete todo with param.id from db  ,@url :DELETE /api/todos/id
-const deleteTodos=(req,res)=>{
-    res.json({"msg":`Delete request from server for ${req.params.id}`});
+const deleteTodos=async(req,res)=>{
+    const result=await Todos.deleteOne({
+        title: req.params.id
+    });
+    res.json(result);
 }
 
 export {getTodos,postTodos,updateTodos,deleteTodos};
