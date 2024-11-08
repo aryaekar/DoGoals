@@ -1,0 +1,20 @@
+{
+  "name": "todoapp",
+  "version": "1.0.0",
+  "description": "MERN ToDo App",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon ./server/server.js"
+  },
+  "author": "Arya Ekar",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-async-handler": "^1.2.0",
+    "mongodb": "^6.10.0",
+    "nodemon": "^3.1.7"
+  }
+}
