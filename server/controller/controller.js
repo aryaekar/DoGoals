@@ -19,7 +19,7 @@ const postTodos=async(req,res)=>{
 //@desc :Update todo with param.id from db  ,@url :PUT /api/todos/id
 const updateTodos=async(req,res)=>{
     const result=await Todos.updateOne(
-        {title: req.params.id},
+        {_id: req.params.id},
         {$set:
             {title: req.body.title}
         }
@@ -30,7 +30,7 @@ const updateTodos=async(req,res)=>{
 //@desc :Delete todo with param.id from db  ,@url :DELETE /api/todos/id
 const deleteTodos=async(req,res)=>{
     const result=await Todos.deleteOne({
-        title: req.params.id
+        _id: req.params.id
     });
     res.json(result);
 }
