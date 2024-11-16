@@ -1,14 +1,20 @@
 import express from 'express';
 import { getTodos,postTodos,updateTodos,deleteTodos } from '../controller/controller.js';
+import { loginUser,registerUser,meUser } from '../controller/usercontroller.js';
 
 const router=express.Router();
 
-router.get("/",getTodos);
+router.get("/todos/",getTodos);
+router.post("/todos/",postTodos);
+router.put("/todos/:id",updateTodos);
+router.delete("/todos/:id",deleteTodos);
 
-router.post("/",postTodos);
+router.post("/user/login",loginUser);
+router.post("/user/register",registerUser);
+router.get("/user/me/:id",meUser);
 
-router.put("/:id",updateTodos);
-
-router.delete("/:id",deleteTodos);
+router.all("/*",(req,res)=>{
+    res.json({"msg":"Address not found"}).status(404);
+})
 
 export default router;
