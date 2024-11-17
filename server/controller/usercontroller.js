@@ -3,6 +3,7 @@ import User from "../models/usermodel.js";
 
 //@desc: Validate user login  ,@method: POST /api/user/login
 const loginUser = (req, res) => {
+    const {username,password}=req.body;
     res.json({ "msg": "uaer login" });
 }
 
