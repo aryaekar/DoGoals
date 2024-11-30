@@ -3,11 +3,13 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/HomePage';
 import MainLayout from './pages/MainLayout';
 import LoginPage from './pages/LoginPage';
+import { useState } from 'react';
 
 function App() {
+  const [userDetails,setUserDetails]=useState({});
   return (
     <Routes>
-      <Route index element={<LoginPage/>}/>
+      <Route index element={<LoginPage setUserDetails={setUserDetails}/>}/>
       <Route path='/' element={<MainLayout />}>
         <Route path='/home' element={<Home />} />
       </Route>

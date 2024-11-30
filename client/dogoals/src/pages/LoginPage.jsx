@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
+const LoginPage = ({setUserDetails}) => {
     const [error, setError] = useState("");
+    const navigate=useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = {
@@ -30,9 +32,9 @@ const LoginPage = () => {
             }
 
             console.log("Login Successful:", data);
+            setUserDetails(data);
+            navigate('/home');
 
-            // Redirect or update app state
-            alert("Login successful!");
         } catch (err) {
             console.error(err);
             setError(err.message || "Something went wrong");
