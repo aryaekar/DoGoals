@@ -1,14 +1,18 @@
 import './App.css';
-import {BrowserRouter,Routes,Route} from 'react-router-dom';
-import Home from './pages/home';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/HomePage';
+import MainLayout from './pages/MainLayout';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
-    <BrowserRouter future={{v7_startTransition: true,v7_relativeSplatPath:true}}>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route index element={<LoginPage/>}/>
+      <Route path='/' element={<MainLayout />}>
+        <Route path='/home' element={<Home />} />
+      </Route>
+      <Route path='*' element={<h1>page not found</h1>} />
+    </Routes>
   );
 }
 

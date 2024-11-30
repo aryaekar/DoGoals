@@ -2,19 +2,31 @@ import mongoose from "mongoose";
 import User from "../models/usermodel.js";
 
 //@desc: Validate user login  ,@method: POST /api/user/login
-const loginUser = (req, res) => {
-    const {username,password}=req.body;
-    res.json({ "msg": "uaer login" });
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({email: username});
+        if (!user) {
+            return res.status(404).json({ "msg": "Incorrect email" });
+        }
+        if(user.password!==password){
+            return res.status(400).json({ "msg": "Incorrect password" });
+        }
+        res.json(user);
+    }
+    catch (error) {
+        console.error("Error fetching todos:", error);
+        res.status(500).json({ error: "Server error" });
+    }
 }
 
 //@desc: Validate user login  ,@method: POST /api/user/register
 const registerUser = async (req, res) => {
-    const {name,username,password,email}=req.body;
+    const { name, email, password } = req.body;
     const result = await User.create({
         name,
-        username,
+        email,
         password,
-        email
     })
     res.json(result);
 }
@@ -26,14 +38,20 @@ const meUser = async (req, res) => {
         return res.status(400).json({ error: "Invalid ID format" });
 
     try {
-        const result = await User.findOne(id);
+        const result = await User.findOne({ _id: id });
         if (!result)
             return res.status(404).json({ "msg": "user id not found" });
         res.json(result);
     }
     catch (error) {
+        console.error("Error fetching todos:", error);
         res.status(500).json({ error: "Server error" });
     }
 }
 
-export { loginUser, registerUser, meUser };
+const getallusers = async (req, res) => {
+    const result = await User.find();
+    res.json(result);
+}
+
+export { loginUser, registerUser, meUser, getallusers };

@@ -1,7 +1,15 @@
 import mongoose from "mongoose";
 
 const todoSchema=new mongoose.Schema({
-    title: String
+    user:{
+        type:mongoose.Types.ObjectId,
+        ref:'User',
+        required: true
+    },
+    title:{
+        type: String,
+        required: true
+    }
 })
 
 const Todos=mongoose.model("Todos",todoSchema);

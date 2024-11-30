@@ -5,13 +5,18 @@ import mongoose from "mongoose";
 
 //@desc :Get all todos from db  ,@url :GET /api/todos/
 const getTodos=async(req,res)=>{
-    const result = await Todos.find();
+    const {userid}=req.params;
+    const result = await Todos.find({user:userid});
+    if(!result){
+        res.json({"error":"error"});
+    }
     res.json(result);
 }
 
 //@desc :Post new todo to db  ,@url :POST /api/todos/
 const postTodos=async(req,res)=>{
     const result=await Todos.create({
+        user:req.body.user,
         title: req.body.title
     });
     res.json(result);
@@ -26,7 +31,7 @@ const updateTodos=async(req,res)=>{
 
     try{
         const result=await Todos.findByIdAndUpdate(
-            id,
+            {_id:id},
             {title}
         );
         if (!result)
@@ -45,7 +50,7 @@ const deleteTodos=async(req,res)=>{
         return res.status(400).json({ error: "Invalid ID format" });
 
     try{
-        const result=await Todos.findByIdAndDelete(id);
+        const result=await Todos.findByIdAndDelete({_id:id});
         if (!result)
             return res.status(404).json({ "msg": "user id not found" });
         res.json(result);
