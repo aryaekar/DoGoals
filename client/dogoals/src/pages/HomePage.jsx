@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Home = () => {
+const Home = ({userDetails}) => {
     const [todos, setTodos] = useState([]);
 
     const getTodos=async()=> {

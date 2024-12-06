@@ -10,8 +10,8 @@ function App() {
   return (
     <Routes>
       <Route index element={<LoginPage setUserDetails={setUserDetails}/>}/>
-      <Route path='/' element={<MainLayout />}>
-        <Route path='/home' element={<Home />} />
+      <Route path='/' element={<MainLayout userDetails={userDetails}/>}>
+        <Route path='/home' element={<Home userDetails={userDetails} />} />
       </Route>
       <Route path='*' element={<h1>page not found</h1>} />
     </Routes>
