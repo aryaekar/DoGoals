@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
-const MainLayout = ({userDetails}) => {
+const MainLayout = () => {
   return (
     <>
         <Navbar/>
-        <Outlet userDetails={userDetails}/>
+        <Outlet />
     </>
   )
 }

@@ -5,7 +5,7 @@ import { loginUser,registerUser,meUser,getallusers } from '../controller/usercon
 const router=express.Router();
 
 router.get("/todos/:userid",getTodos);
-router.post("/todos/",postTodos);
+router.post("/todos/:userid",postTodos);
 router.put("/todos/:id",updateTodos);
 router.delete("/todos/:id",deleteTodos);
 

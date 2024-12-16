@@ -9,6 +9,9 @@ const todoSchema=new mongoose.Schema({
     title:{
         type: String,
         required: true
+    },
+    group:{
+        type:mongoose.Types.ObjectId
     }
 })
 

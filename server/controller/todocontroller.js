@@ -3,9 +3,11 @@ import mongoose from "mongoose";
 // import expressAsyncHandler from "express-async-handler"
 
 
-//@desc :Get all todos from db  ,@url :GET /api/todos/
+//@desc :Get all todos from db  ,@url :GET /api/todos/userid
 const getTodos=async(req,res)=>{
     const {userid}=req.params;
+    if (!mongoose.isValidObjectId(userid))
+        return res.status(400).json({ error: "Invalid ID format" });
     const result = await Todos.find({user:userid});
     if(!result){
         res.json({"error":"error"});
@@ -13,10 +15,13 @@ const getTodos=async(req,res)=>{
     res.json(result);
 }
 
-//@desc :Post new todo to db  ,@url :POST /api/todos/
+//@desc :Post new todo to db  ,@url :POST /api/todos/userid
 const postTodos=async(req,res)=>{
+    const {userid}=req.params;
+    if (!mongoose.isValidObjectId(userid))
+        return res.status(400).json({ error: "Invalid ID format" });
     const result=await Todos.create({
-        user:req.body.user,
+        user:userid,
         title: req.body.title
     });
     res.json(result);
