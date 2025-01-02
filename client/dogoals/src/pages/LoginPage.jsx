@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
-const LoginPage = ({setUserDetails}) => {
+const LoginPage = () => {
     const [error, setError] = useState("");
     const navigate=useNavigate();
     const handleSubmit = async (e) => {
@@ -31,8 +32,7 @@ const LoginPage = ({setUserDetails}) => {
                 return;
             }
 
-            console.log("Login Successful:", data);
-            setUserDetails(data);
+            Cookies.set("userDetails",JSON.stringify(data),{expires: 5});
             navigate('/home');
 
         } catch (err) {
@@ -42,12 +42,12 @@ const LoginPage = ({setUserDetails}) => {
     };
 
     return (
-        <div style={styles.container}>
-            <h2 style={styles.title}>Login</h2>
+        <div className="w-2/5 mx-auto my-40 p-5 border rounded-lg shadow-md ">
+            <h2 className=" text-center text-2xl my-2 font-bold">Login</h2>
             <form onSubmit={handleSubmit} style={styles.form}>
                 {error && <p style={styles.error}>{error}</p>}
                 <div style={styles.inputGroup}>
-                    <label style={styles.label} htmlFor="email">Email</label>
+                    <label style={styles.label} htmlFor="email" className=" border">Email</label>
                     <input
                         type="email"  //quick fix for validation of email if req validate later
                         name="email"
@@ -73,15 +73,6 @@ const LoginPage = ({setUserDetails}) => {
 export default LoginPage;
 
 const styles = {
-    container: {
-        maxWidth: "400px",
-        margin: "50px auto",
-        padding: "20px",
-        border: "1px solid #ddd",
-        borderRadius: "8px",
-        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-        fontFamily: "Arial, sans-serif",
-    },
     title: {
         textAlign: "center",
         marginBottom: "20px",

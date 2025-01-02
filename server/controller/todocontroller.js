@@ -41,6 +41,7 @@ const updateTodos=async(req,res)=>{
         );
         if (!result)
             return res.status(404).json({ "msg": "user id not found" });
+        
         res.json(result);
     }
     catch (error) {

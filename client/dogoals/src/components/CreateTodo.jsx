@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+
 const CreateTodo = ({ userDetails, refreshTodos }) => {
     const [showForm, setShowForm] = useState(false);
     const [title, setTitle] = useState("");
+    const [selectedGroup, setSelectedGroup] = useState("");
 
-    const postTodo = async (e,title) => {
+    const postTodo = async (e, title) => {
         e.preventDefault();
         try {
             const value = title;
@@ -30,7 +32,7 @@ const CreateTodo = ({ userDetails, refreshTodos }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        postTodo(e,title);
+        postTodo(e, title,selectedGroup);
         setTitle("");
         setShowForm(false);
     };
@@ -39,82 +41,51 @@ const CreateTodo = ({ userDetails, refreshTodos }) => {
         <div>
             <button
                 onClick={() => setShowForm(true)}
-                style={{
-                    backgroundColor: 'blue',
-                    color: 'white',
-                    border: 'none',
-                    padding: '10px 15px',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                }}
+                className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 focus:outline-none"
             >
                 Create Todo
             </button>
 
             {showForm && (
-                <div
-                    style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ">
                     <form
                         onSubmit={handleSubmit}
-                        style={{
-                            backgroundColor: 'white',
-                            padding: '20px',
-                            borderRadius: '10px',
-                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                            width: '300px',
-                        }}
+                        className="bg-white p-8 rounded-lg shadow-md w-2/5"
                     >
-                        <h3>Create Todo</h3>
-                        <label htmlFor="title">Title:</label>
+                        <h3 className="text-lg font-bold mb-4">Create Todo</h3>
+                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title:</label>
                         <input
                             type="text"
                             id="title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            style={{
-                                width: '100%',
-                                padding: '8px',
-                                margin: '10px 0',
-                                borderRadius: '5px',
-                                border: '1px solid #ccc',
-                            }}
+                            className="w-full px-3 py-2 mt-2 mb-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         />
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Group:</label>
+                        <select
+                            id="group"
+                            value={selectedGroup}
+                            onChange={(e) => setSelectedGroup(e.target.value)}
+                            className="w-full px-3 py-2 mt-2 mb-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        >
+                            <option value="">Select a group</option>
+                            {/* {groups.map((group) => (
+                                <option key={group._id} value={group._id}>
+                                    {group.name}
+                                </option>
+                            ))} */}
+                        </select>
+                        <div className="flex justify-between">
                             <button
                                 type="button"
                                 onClick={() => setShowForm(false)}
-                                style={{
-                                    backgroundColor: 'gray',
-                                    color: 'white',
-                                    border: 'none',
-                                    padding: '10px 15px',
-                                    borderRadius: '5px',
-                                    cursor: 'pointer',
-                                }}
+                                className="bg-gray-500 text-white px-4 py-2 rounded shadow hover:bg-gray-600 focus:outline-none"
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
-                                style={{
-                                    backgroundColor: 'green',
-                                    color: 'white',
-                                    border: 'none',
-                                    padding: '10px 15px',
-                                    borderRadius: '5px',
-                                    cursor: 'pointer',
-                                }}
+                                className="bg-green-500 text-white px-4 py-2 rounded shadow hover:bg-green-600 focus:outline-none"
                             >
                                 Submit
                             </button>
@@ -123,7 +94,7 @@ const CreateTodo = ({ userDetails, refreshTodos }) => {
                 </div>
             )}
         </div>
-    )
+    );
 }
 
-export default CreateTodo
+export default CreateTodo;

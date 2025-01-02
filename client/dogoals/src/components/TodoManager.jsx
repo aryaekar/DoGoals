@@ -16,7 +16,16 @@ const TodoManager = ({ userDetails }) => {
             console.log(error);
         }
     }
-
+    // const getGroups = async () => {
+    //     try {
+    //         const res = await fetch(`http://localhost:8000/api/todos/${userDetails._id}`);
+    //         const result = await res.json();
+    //         setTodos(result);
+    //     }
+    //     catch (error) {
+    //         console.log(error);
+    //     }
+    // }
     useEffect(() => {
         getTodos();
     }, []);
