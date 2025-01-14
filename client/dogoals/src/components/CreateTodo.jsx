@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 
-const CreateTodo = ({ userDetails, refreshTodos }) => {
+const CreateTodo = ({ userDetails, refreshTodos, groups }) => {
     const [showForm, setShowForm] = useState(false);
     const [title, setTitle] = useState("");
     const [selectedGroup, setSelectedGroup] = useState("");
 
-    const postTodo = async (e, title) => {
+    const postTodo = async (e, title,selectedGroup) => {
         e.preventDefault();
         try {
             const value = title;
+            const group=selectedGroup;
             if (!value || value === "") {
                 console.log("Invalid data");
                 return;
@@ -18,7 +19,7 @@ const CreateTodo = ({ userDetails, refreshTodos }) => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ title: value })
+                body: JSON.stringify({ title: value ,group: group})
             });
             if (!res.ok) {
                 console.log("Error in sending data");
@@ -32,6 +33,7 @@ const CreateTodo = ({ userDetails, refreshTodos }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // console.log(selectedGroup);
         postTodo(e, title,selectedGroup);
         setTitle("");
         setShowForm(false);
@@ -69,11 +71,11 @@ const CreateTodo = ({ userDetails, refreshTodos }) => {
                             className="w-full px-3 py-2 mt-2 mb-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         >
                             <option value="">Select a group</option>
-                            {/* {groups.map((group) => (
+                            {groups.map((group) => (
                                 <option key={group._id} value={group._id}>
-                                    {group.name}
+                                    {group.groupname}
                                 </option>
-                            ))} */}
+                            ))}
                         </select>
                         <div className="flex justify-between">
                             <button

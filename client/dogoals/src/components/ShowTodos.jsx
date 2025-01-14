@@ -1,5 +1,5 @@
 import TodoCard from "./TodoCard";
-const ShowTodos = ({refreshTodos,todos}) => {
+const ShowTodos = ({refreshTodos,todos,groups}) => {
 
     async function deleteTodo(id){
         // console.log(id);
@@ -22,7 +22,7 @@ const ShowTodos = ({refreshTodos,todos}) => {
             {/* <button onClick={() => refreshTodos()}>refreshTodos</button> */}
             {
                 todos.map((todo) => (
-                    <TodoCard key={todo._id} todo={todo} deleteTodo={deleteTodo}/>
+                    <TodoCard key={todo._id} todo={todo} deleteTodo={deleteTodo} groups={groups} />
                 ))
             }
         </div>

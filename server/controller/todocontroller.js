@@ -18,11 +18,15 @@ const getTodos=async(req,res)=>{
 //@desc :Post new todo to db  ,@url :POST /api/todos/userid
 const postTodos=async(req,res)=>{
     const {userid}=req.params;
+    const {group}=req.body;
     if (!mongoose.isValidObjectId(userid))
+        return res.status(400).json({ error: "Invalid ID format" });
+    if (!mongoose.isValidObjectId(group))
         return res.status(400).json({ error: "Invalid ID format" });
     const result=await Todos.create({
         user:userid,
-        title: req.body.title
+        title: req.body.title,
+        group: group
     });
     res.json(result);
 }
