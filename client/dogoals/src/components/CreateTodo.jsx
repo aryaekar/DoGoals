@@ -4,6 +4,7 @@ const CreateTodo = ({ userDetails, refreshTodos, groups }) => {
     const [showForm, setShowForm] = useState(false);
     const [title, setTitle] = useState("");
     const [selectedGroup, setSelectedGroup] = useState("");
+    const [error,setError]=useState("");
 
     const postTodo = async (e, title,selectedGroup) => {
         e.preventDefault();
@@ -34,8 +35,14 @@ const CreateTodo = ({ userDetails, refreshTodos, groups }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log(selectedGroup);
+        if(!title||title===""){
+            setError("This field is required")
+            return;
+        }
+        setError("");
         postTodo(e, title,selectedGroup);
         setTitle("");
+        setSelectedGroup("");
         setShowForm(false);
     };
 
@@ -56,14 +63,15 @@ const CreateTodo = ({ userDetails, refreshTodos, groups }) => {
                     >
                         <h3 className="text-lg font-bold mb-4">Create Todo</h3>
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title:</label>
+                        {error&& (<div className="text-red-600">{error}</div>)}
                         <input
                             type="text"
                             id="title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            className="w-full px-3 py-2 mt-2 mb-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            className="w-full px-3 py-2 mt-2 mb-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" 
                         />
-                        <label htmlFor="title" className="block text-sm font-medium text-gray-700">Group:</label>
+                        <label htmlFor="group" className="block text-sm font-medium text-gray-700">Group:</label>
                         <select
                             id="group"
                             value={selectedGroup}
@@ -80,7 +88,10 @@ const CreateTodo = ({ userDetails, refreshTodos, groups }) => {
                         <div className="flex justify-between">
                             <button
                                 type="button"
-                                onClick={() => setShowForm(false)}
+                                onClick={() => {
+                                    setError("");
+                                    setShowForm(false);
+                                }}
                                 className="bg-gray-500 text-white px-4 py-2 rounded shadow hover:bg-gray-600 focus:outline-none"
                             >
                                 Cancel

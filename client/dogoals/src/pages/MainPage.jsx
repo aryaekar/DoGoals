@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import ShowTodos from "../components/ShowTodos";
 import CreateTodo from "../components/CreateTodo";
+import CreateGroup from "../components/CreateGroup";
+import ShowGroups from "../components/ShowGroups";
 
 const MainPage = () => {
     const userDetails=useOutletContext();
@@ -51,8 +53,10 @@ const MainPage = () => {
     return (
         <>
             <h1>Home</h1>
+            <CreateGroup userDetails={userDetails} refreshGroups={getGroups}/>
             {groups?(<CreateTodo userDetails={userDetails} refreshTodos={getTodos} groups={groups}/>):(<p>Loading</p>)}
             {todos&&groups?(<ShowTodos todos={todos} refreshTodos={getTodos} groups={groups}/>):(<p>Loading</p>)}
+            {groups?(<ShowGroups groups={groups} refreshGroups={getGroups}/>):(<p>Loading</p>)}
         </>
     );
 }
