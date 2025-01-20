@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 const todoSchema=new mongoose.Schema({
     user:{
@@ -12,6 +12,11 @@ const todoSchema=new mongoose.Schema({
     },
     group:{
         type:mongoose.Types.ObjectId
+    },
+    status:{
+        type:String,
+        enum:["Pending","In-Progress","Completed"],
+        default:"Pending"
     }
 })
 

@@ -21,27 +21,36 @@ const postTodos=async(req,res)=>{
     const {group}=req.body;
     if (!mongoose.isValidObjectId(userid))
         return res.status(400).json({ error: "Invalid ID format" });
-    if (!mongoose.isValidObjectId(group))
-        return res.status(400).json({ error: "Invalid ID format" });
-    const result=await Todos.create({
-        user:userid,
-        title: req.body.title,
-        group: group
-    });
-    res.json(result);
+    if(!group||group===""){
+        const result=await Todos.create({
+            user:userid,
+            title: req.body.title
+        });
+        res.json(result);
+    }
+    else{
+        if (!mongoose.isValidObjectId(group))
+            return res.status(400).json({ error: "Invalid ID format" });
+        const result=await Todos.create({
+            user:userid,
+            title: req.body.title,
+            group: group
+        });
+        res.json(result);
+    }
 }
 
 //@desc :Update todo with param.id from db  ,@url :PUT /api/todos/id
 const updateTodos=async(req,res)=>{
     const { id } = req.params;
-    const {title}=req.body;
+    const {status}=req.body;
     if (!mongoose.isValidObjectId(id))
         return res.status(400).json({ error: "Invalid ID format" });
 
     try{
         const result=await Todos.findByIdAndUpdate(
             {_id:id},
-            {title}
+            {status:status}
         );
         if (!result)
             return res.status(404).json({ "msg": "user id not found" });

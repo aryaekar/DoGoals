@@ -1,8 +1,6 @@
-import React from 'react';
-
-const TodoCard = ({ todo, deleteTodo, groups }) => {
+const TodoCard = ({ todo, deleteTodo, groups, updateTodo }) => {
     const groupObject = groups.find(group => group._id === todo.group);
-    const groupname = groupObject ? groupObject.groupname : "None";
+    const groupname = groupObject ? groupObject.groupname : "None";    
 
     return (
         <div style={{
@@ -15,7 +13,12 @@ const TodoCard = ({ todo, deleteTodo, groups }) => {
             alignItems: 'center',
         }}>
             <span>{todo.title}</span>
-            <div className="flex justify-between w-44">
+            <div className="flex justify-around w-60">
+                <select id="status" value={todo.status} onChange={(e) => updateTodo(todo._id,e.target.value)} className="bg-slate-400 p-2 rounded-md appearance-none">
+                    <option value="Pending" className="">Pending</option>
+                    <option value="In-Progress">In-Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
                 <div className="bg-slate-400 p-2 rounded-md">{groupname}</div>
                 <button 
                     onClick={() => deleteTodo(todo._id)} 
