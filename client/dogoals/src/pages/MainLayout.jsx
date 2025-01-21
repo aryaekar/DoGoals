@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const MainLayout = () => {
   const [user, setuser] = useState();
+  const [showmenu,setShowmenu]=useState(false);
     useEffect(() => {
         const cookieData = Cookies.get("userDetails");
         if (cookieData) {
@@ -15,12 +16,14 @@ const MainLayout = () => {
             }
         }
     }, [])
-
+    const displayMenu=()=>{
+      setShowmenu(!showmenu);
+    }
   return (
-    <>
-        <Navbar/>
-        {user?<Outlet context={user}/>:<h2>Loading user...</h2>}
-    </>
+    <div>
+        <Navbar displayMenu={displayMenu}/>
+        {user?<Outlet context={{user,showmenu,displayMenu}}/>:<h2>Loading user...</h2>}
+    </div>
   )
 }
 
