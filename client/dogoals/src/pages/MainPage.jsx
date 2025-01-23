@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext,Outlet } from "react-router-dom";
 import ShowTodos from "../components/ShowTodos";
 import CreateTodo from "../components/CreateTodo";
 import CreateGroup from "../components/CreateGroup";
@@ -52,12 +52,15 @@ const MainPage = () => {
     },[]);
     
     return (
-        <div className="mt-14 p-2 bg-gray-50">
+        <div className="mt-14 p-2 bg-gray-100 h-screen">
             {showmenu?<SideMenu groups={groups} displayMenu={displayMenu}/>:null}
-            <CreateGroup userDetails={user} refreshGroups={getGroups}/>
+            <div className="bg-white p-2 m-1 rounded-lg">
+                <Outlet context={{user,todos,groups,getTodos,getGroups}}/>
+            </div>
+            {/* <CreateGroup userDetails={user} refreshGroups={getGroups}/>
             {groups?(<CreateTodo userDetails={user} refreshTodos={getTodos} groups={groups}/>):(<p>Loading</p>)}
             {todos&&groups?(<ShowTodos todos={todos} refreshTodos={getTodos} groups={groups}/>):(<p>Loading</p>)}
-            {groups?(<ShowGroups groups={groups} refreshGroups={getGroups}/>):(<p>Loading</p>)}
+            {groups?(<ShowGroups groups={groups} refreshGroups={getGroups}/>):(<p>Loading</p>)} */}
         </div>
     );
 }

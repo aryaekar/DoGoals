@@ -2,13 +2,21 @@ import { Routes, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import MainLayout from './pages/MainLayout';
 import LoginPage from './pages/LoginPage';
+import AllTaskPage from './pages/AllTaskPage';
+import GroupTaskPage from './pages/GroupTaskPage';
+import StatusTaskPage from './pages/StatusTaskPage';
 
 function App() {
   return (
     <Routes>
-      <Route index element={<LoginPage/>}/>
-      <Route path='/' element={<MainLayout />}>
-        <Route path='/home' element={<MainPage />} />
+      <Route path='/login' element={<LoginPage/>}/>
+      <Route element={<MainLayout />}>
+        <Route  element={<MainPage />} >
+          <Route path='/' element={<AllTaskPage/>}/>
+          <Route path='/group/:groupid' element={<GroupTaskPage/>}/>
+          <Route path='/status/:status' element={<StatusTaskPage/>}/>
+
+        </Route>
       </Route>
       <Route path='*' element={<h1>page not found</h1>} />
     </Routes>

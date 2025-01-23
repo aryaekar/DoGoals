@@ -33,7 +33,7 @@ const LoginPage = () => {
             }
 
             Cookies.set("userDetails",JSON.stringify(data),{expires: 5});
-            navigate('/home');
+            navigate('/');
 
         } catch (err) {
             console.error(err);

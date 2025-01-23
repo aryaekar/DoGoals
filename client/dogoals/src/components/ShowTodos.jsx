@@ -39,11 +39,11 @@ const ShowTodos = ({refreshTodos,todos,groups}) => {
 
     return (
         <div>
-            {/* <button onClick={() => refreshTodos()}>refreshTodos</button> */}
+            {/* {console.log(todos)} */}
             {
-                todos.map((todo) => (
+                todos&&todos.length>0?todos.map((todo) => (
                     <TodoCard key={todo._id} todo={todo} deleteTodo={deleteTodo} groups={groups} updateTodo={updateTodo}/>
-                ))
+                )):(<div className="text-center text-red-500">No Task Yet</div>)
             }
         </div>
     )
