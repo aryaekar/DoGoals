@@ -46,7 +46,7 @@ const ShowTodos = ({refreshTodos,todos,groups}) => {
                 todos&&todos.length>0?todos.map((todo) => (
                     <TodoCard key={todo._id} todo={todo} deleteTodo={deleteTodo} groups={groups} updateTodo={updateTodo} openDropdownId={openDropdownId}
                     setOpenDropdownId={setOpenDropdownId}/>
-                )):(<div className="text-center text-red-500">No Task Yet</div>)
+                )):(<div className="text-center text-red-500">No Tasks Yet</div>)
             }
         </div>
     )
