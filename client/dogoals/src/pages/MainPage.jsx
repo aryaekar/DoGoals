@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import { useOutletContext,Outlet } from "react-router-dom";
-import ShowTodos from "../components/ShowTodos";
-import CreateTodo from "../components/CreateTodo";
-import CreateGroup from "../components/CreateGroup";
-import ShowGroups from "../components/ShowGroups";
 import SideMenu from "../components/SideMenu";
 
 const MainPage = () => {
     const {user,showmenu,displayMenu}=useOutletContext();
     const [todos,setTodos]=useState([]);
     const [groups,setGroups]=useState([]);
+
+    const deleteGroup = async (id) => {
+        try {
+            const res = await fetch(`http://localhost:8000/api/groups/${id}`, {
+                method: "DELETE"
+            });
+            if (!res.ok) {
+                console.log("Error in deleting data");
+            }
+            getGroups();
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 
     const getTodos=async()=>{
         try{
@@ -53,8 +64,8 @@ const MainPage = () => {
     
     return (
         <div className="mt-14 p-2 bg-gray-100 h-screen">
-            {showmenu?<SideMenu groups={groups} displayMenu={displayMenu}/>:null}
-            <div className="bg-white p-2 m-1 rounded-lg">
+            {showmenu?<SideMenu groups={groups} displayMenu={displayMenu} getGroups={getGroups} user={user} deleteGroup={deleteGroup}/>:null}
+            <div className="bg-white p-6 m-1 rounded-lg min-h-">
                 <Outlet context={{user,todos,groups,getTodos,getGroups}}/>
             </div>
             {/* <CreateGroup userDetails={user} refreshGroups={getGroups}/>

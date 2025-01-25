@@ -1,5 +1,7 @@
 import TodoCard from "./TodoCard";
+import { useState } from "react";
 const ShowTodos = ({refreshTodos,todos,groups}) => {
+    const [openDropdownId, setOpenDropdownId] = useState(null);
 
     async function deleteTodo(id){
         // console.log(id);
@@ -42,7 +44,8 @@ const ShowTodos = ({refreshTodos,todos,groups}) => {
             {/* {console.log(todos)} */}
             {
                 todos&&todos.length>0?todos.map((todo) => (
-                    <TodoCard key={todo._id} todo={todo} deleteTodo={deleteTodo} groups={groups} updateTodo={updateTodo}/>
+                    <TodoCard key={todo._id} todo={todo} deleteTodo={deleteTodo} groups={groups} updateTodo={updateTodo} openDropdownId={openDropdownId}
+                    setOpenDropdownId={setOpenDropdownId}/>
                 )):(<div className="text-center text-red-500">No Task Yet</div>)
             }
         </div>

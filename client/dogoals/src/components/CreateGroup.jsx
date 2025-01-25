@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-const CreateGroup = ({userDetails,refreshGroups}) => {
-    const [showForm, setShowForm] = useState(false);
+const CreateGroup = ({userDetails,refreshGroups,showForm,setShowForm}) => {
     const [name, setName] = useState("");
     const [error,setError]=useState("");
 
@@ -43,9 +42,7 @@ const CreateGroup = ({userDetails,refreshGroups}) => {
     }
     return (
         <div>
-            <button onClick={() => setShowForm(true)} className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 focus:outline-none">Create Group</button>
-
-
+            
             {showForm && (
                 <div className=" inset-0 fixed bg-black bg-opacity-50 flex justify-center items-center">
                     <form className="bg-white p-8 rounded-lg shadow-md w-2/5" onSubmit={handleSubmit}>

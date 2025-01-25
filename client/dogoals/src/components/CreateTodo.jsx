@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-const CreateTodo = ({ userDetails, refreshTodos, groups }) => {
-    const [showForm, setShowForm] = useState(false);
+const CreateTodo = ({ userDetails, refreshTodos, groups,showForm,setShowForm }) => {
     const [title, setTitle] = useState("");
     const [selectedGroup, setSelectedGroup] = useState("");
     const [error,setError]=useState("");
@@ -48,12 +47,7 @@ const CreateTodo = ({ userDetails, refreshTodos, groups }) => {
 
     return (
         <div>
-            <button
-                onClick={() => setShowForm(true)}
-                className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600 focus:outline-none"
-            >
-                Create Todo
-            </button>
+            
 
             {showForm && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center ">
