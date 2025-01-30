@@ -4,6 +4,7 @@ const CreateTodo = ({ userDetails, refreshTodos, groups,showForm,setShowForm }) 
     const [title, setTitle] = useState("");
     const [selectedGroup, setSelectedGroup] = useState("");
     const [error,setError]=useState("");
+    const API_URL = process.env.SERVER_URL;
 
     const postTodo = async (e, title,selectedGroup) => {
         e.preventDefault();
@@ -14,7 +15,7 @@ const CreateTodo = ({ userDetails, refreshTodos, groups,showForm,setShowForm }) 
                 console.log("Invalid data");
                 return;
             }
-            const res = await fetch(`http://localhost:8000/api/todos/${userDetails._id}`, {
+            const res = await fetch(`${API_URL}/api/todos/${userDetails._id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

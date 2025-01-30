@@ -2,11 +2,12 @@ import TodoCard from "./TodoCard";
 import { useState } from "react";
 const ShowTodos = ({refreshTodos,todos,groups}) => {
     const [openDropdownId, setOpenDropdownId] = useState(null);
+    const API_URL=process.env.SERVER_URL;
 
     async function deleteTodo(id){
         // console.log(id);
         try{
-            const res=await fetch(`http://localhost:8000/api/todos/${id}`,{
+            const res=await fetch(`${API_URL}/api/todos/${id}`,{
                 method:"DELETE"
             });
             if (!res.ok) {

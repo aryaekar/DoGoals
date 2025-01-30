@@ -1,9 +1,11 @@
 import GroupCard from "./GroupCard";
 
 const ShowGroups = ({ groups, refreshGroups }) => {
+  const API_URL=process.env.SERVER_URL;
+  
   const deleteGroup = async (id) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/groups/${id}`, {
+      const res = await fetch(`${API_URL}/api/groups/${id}`, {
         method: "DELETE"
       });
       if (!res.ok) {

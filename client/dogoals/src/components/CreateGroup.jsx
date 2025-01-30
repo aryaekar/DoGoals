@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const CreateGroup = ({userDetails,refreshGroups,showForm,setShowForm}) => {
     const [name, setName] = useState("");
     const [error,setError]=useState("");
+    const API_URL = process.env.SERVER_URL;
 
     const postGroup = async (e, name) => {
         e.preventDefault();
@@ -12,7 +13,7 @@ const CreateGroup = ({userDetails,refreshGroups,showForm,setShowForm}) => {
                 console.log("Invalid data");
                 return;
             }
-            const res = await fetch(`http://localhost:8000/api/groups/${userDetails._id}`, {
+            const res = await fetch(`${API_URL}/api/groups/${userDetails._id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -6,10 +6,12 @@ const MainPage = () => {
     const {user,showmenu,displayMenu}=useOutletContext();
     const [todos,setTodos]=useState([]);
     const [groups,setGroups]=useState([]);
+    const API_URL = process.env.SERVER_URL;
+
 
     const deleteGroup = async (id) => {
         try {
-            const res = await fetch(`http://localhost:8000/api/groups/${id}`, {
+            const res = await fetch(`${API_URL}/api/groups/${id}`, {
                 method: "DELETE"
             });
             if (!res.ok) {
@@ -24,7 +26,7 @@ const MainPage = () => {
 
     const getTodos=async()=>{
         try{
-            const res=await fetch(`http://localhost:8000/api/todos/${user._id}`);
+            const res=await fetch(`${API_URL}/api/todos/${user._id}`);
             const result=await res.json();
             if(!result){
                 console.log({"error":"error while fetching todos"});
@@ -44,7 +46,7 @@ const MainPage = () => {
 
     const getGroups=async()=>{
         try{
-            const res=await fetch(`http://localhost:8000/api/groups/${user._id}`);
+            const res=await fetch(`${API_URL}/api/groups/${user._id}`);
             const result=await res.json();
             if(!result){
                 console.log({"error":"error while fetching groups"});
@@ -68,10 +70,6 @@ const MainPage = () => {
             <div className="bg-white p-6 m-1 rounded-lg min-h-">
                 <Outlet context={{user,todos,groups,getTodos,getGroups}}/>
             </div>
-            {/* <CreateGroup userDetails={user} refreshGroups={getGroups}/>
-            {groups?(<CreateTodo userDetails={user} refreshTodos={getTodos} groups={groups}/>):(<p>Loading</p>)}
-            {todos&&groups?(<ShowTodos todos={todos} refreshTodos={getTodos} groups={groups}/>):(<p>Loading</p>)}
-            {groups?(<ShowGroups groups={groups} refreshGroups={getGroups}/>):(<p>Loading</p>)} */}
         </div>
     );
 }

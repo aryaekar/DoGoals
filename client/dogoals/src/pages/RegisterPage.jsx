@@ -8,6 +8,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfirmPassword] = useState("");
   const navigate = useNavigate();
+  const API_URL = process.env.SERVER_URL;
 
   const handleSubmit = async (e) => {
       e.preventDefault();
@@ -22,7 +23,7 @@ const RegisterPage = () => {
       }
       try {
           setError("");
-          const response = await fetch("http://localhost:8000/api/user/register", {
+          const response = await fetch(`${API_URL}/api/user/register`, {
               method: "POST",
               headers: {
                   "Content-Type": "application/json",

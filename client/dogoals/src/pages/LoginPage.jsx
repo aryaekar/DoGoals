@@ -7,6 +7,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const API_URL = process.env.SERVER_URL;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,7 +19,7 @@ const LoginPage = () => {
 
         try {
             setError("");
-            const response = await fetch("http://localhost:8000/api/user/login", {
+            const response = await fetch(`${API_URL}/api/user/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
