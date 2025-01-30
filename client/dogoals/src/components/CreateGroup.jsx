@@ -3,7 +3,7 @@ import { useState } from 'react';
 const CreateGroup = ({userDetails,refreshGroups,showForm,setShowForm}) => {
     const [name, setName] = useState("");
     const [error,setError]=useState("");
-    const API_URL = process.env.SERVER_URL;
+    const API_URL = process.env.REACT_APP_SERVER_URL;
 
     const postGroup = async (e, name) => {
         e.preventDefault();

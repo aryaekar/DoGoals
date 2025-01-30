@@ -1,7 +1,7 @@
 import GroupCard from "./GroupCard";
 
 const ShowGroups = ({ groups, refreshGroups }) => {
-  const API_URL=process.env.SERVER_URL;
+  const API_URL=process.env.REACT_APP_SERVER_URL;
   
   const deleteGroup = async (id) => {
     try {

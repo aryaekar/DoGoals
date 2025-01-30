@@ -2,7 +2,7 @@ import TodoCard from "./TodoCard";
 import { useState } from "react";
 const ShowTodos = ({refreshTodos,todos,groups}) => {
     const [openDropdownId, setOpenDropdownId] = useState(null);
-    const API_URL=process.env.SERVER_URL;
+    const API_URL=process.env.REACT_APP_SERVER_URL;
 
     async function deleteTodo(id){
         // console.log(id);

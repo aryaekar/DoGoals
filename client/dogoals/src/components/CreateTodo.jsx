@@ -4,7 +4,7 @@ const CreateTodo = ({ userDetails, refreshTodos, groups,showForm,setShowForm }) 
     const [title, setTitle] = useState("");
     const [selectedGroup, setSelectedGroup] = useState("");
     const [error,setError]=useState("");
-    const API_URL = process.env.SERVER_URL;
+    const API_URL = process.env.REACT_APP_SERVER_URL;
 
     const postTodo = async (e, title,selectedGroup) => {
         e.preventDefault();

@@ -8,7 +8,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfirmPassword] = useState("");
   const navigate = useNavigate();
-  const API_URL = process.env.SERVER_URL;
+  const API_URL = process.env.REACT_APP_SERVER_URL;
 
   const handleSubmit = async (e) => {
       e.preventDefault();

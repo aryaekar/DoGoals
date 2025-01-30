@@ -6,7 +6,7 @@ const MainPage = () => {
     const {user,showmenu,displayMenu}=useOutletContext();
     const [todos,setTodos]=useState([]);
     const [groups,setGroups]=useState([]);
-    const API_URL = process.env.SERVER_URL;
+    const API_URL = process.env.REACT_APP_SERVER_URL;
 
 
     const deleteGroup = async (id) => {
